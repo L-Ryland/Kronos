@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kronos Financial Prediction Web UI</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="/vendor/plotly.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
         * {
@@ -1047,20 +1047,6 @@
                 const lookback = parseInt(document.getElementById('lookback').value);
                 const predLen = parseInt(document.getElementById('pred-len').value);
                 
-                // Get selected time range from time window slider
-                const startHandle = document.getElementById('start-handle');
-                const startPercentage = parseFloat(startHandle.style.left) / 100;
-                
-                if (!sliderData) {
-                    showStatus('error', 'Time window slider not initialized');
-                    return;
-                }
-                
-                // Calculate selected time range
-                const totalTime = sliderData.endDate.getTime() - sliderData.startDate.getTime();
-                const startTime = sliderData.startDate.getTime() + (totalTime * startPercentage);
-                const startDate = new Date(startTime);
-                
                 // Get prediction quality parameters
                 const temperature = parseFloat(document.getElementById('temperature').value);
                 const topP = parseFloat(document.getElementById('top-p').value);
@@ -1070,7 +1056,6 @@
                     file_path: currentDataFile,
                     lookback: lookback,
                     pred_len: predLen,
-                    start_date: startDate.toISOString().slice(0, 16), // Format as YYYY-MM-DDTHH:MM
                     temperature: temperature,
                     top_p: topP,
                     sample_count: sampleCount

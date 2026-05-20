@@ -74,3 +74,5 @@ venv.bak/
 temp/
 tmp/
 .python-version
+data/
+webui/prediction_results
